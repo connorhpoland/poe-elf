@@ -1,0 +1,136 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+
+<snapshot name="Example Market Snapshot">
+
+	<!-- marketIndex.xml version -->
+	<version>0.0</version>
+	
+	<!-- index creation date (yyyy-mm-dd-hh:mm) -->
+	<date>2022-06-06-21:30</date>
+	
+	<!-- Items are seperated by classes (Based on poe.ninja classes) -->
+	<class name="Currency">
+		<!-- Each item belongs to a single class -->
+		<item name="Mirror of Kalandra">
+			<!-- Each item has a chaos orb value with 2 decimal precision -->
+			<chaosValue>1.00</chaosValue>
+		</item>
+		<item name="Mirror Shard"><chaosValue>1.0</chaosValue></item>
+	</class>
+	
+	<class name="Map Fragments">
+		<!-- Map Fragments are formatted the same as Currency -->
+		<item name="The Maven's Writ">
+			<chaosValue>1.00</chaosValue>
+		</item>
+	</class>
+
+	<class name="Divination">
+		<!-- Divination cards are formatted the same as Currency -->
+		<item name="House of Mirrors">
+			<chaosValue>1.00</chaosValue>
+		</item>
+		<item name="The Cheater"><chaosValue>1.00</chaosValue></item>
+	</class>
+
+	<!-- class name="Artifacts" is not a seperate class, they are Currency -->
+
+	<!-- class name="Oils" is not a seperate class, they are Currency -->
+
+	<class name="Incubator">
+		<!-- Incubators are formatted the same as Currency -->
+	</class>
+
+	<class name="Unique">
+		<!-- We are actaully only looking at unique base names, the item names are not relevant -->
+		<item name="Triumphant Lamellar">
+			<!-- Items either are (1) or are not (0) replicas -->
+			<replica>1</replica>
+			<!-- Some items value is dependent on thier links (5 or 6) or not (0) -->
+			<links>6</links>
+			<chaosValue>1.00</chaosValue>
+		</item>
+		<item name="Triumphant Lamellar">
+			<replica>0</replica>
+			<links>6</links>
+			<chaosValue>1.00</chaosValue>
+		</item>
+		<item name="Triumphant Lamellar"><replica>0</replica><links>0</links><chaosValue>1.00</chaosValue></item>
+		<item name="Murder Boots"><replica>0</replica><links>0</links><chaosValue>1.00</chaosValue></item>
+		<item name="Murder Boots"><replica>0</replica><links>0</links><chaosValue>1.00</chaosValue></item>
+	</class>
+	
+	<class name="Gems">
+		<item name="Awakened Enlighten Support">
+			<!-- Gems may have an alternate quality -->
+			<qualityType>Normal</qualityType>
+			<!-- All gems are priced my current level -->
+			<level>5</level>
+			<!-- All gems are priced my current quality -->
+			<quality>20</quality>
+			<!-- All gems are priced based on if they have been corrupted (1) or not (0) -->
+			<corrupted>1</corrupted>
+			<chaosValue>1.00</chaosValue>
+		</item>
+		<item name="Awakened Enlighten Support"><level>1</level><quality>20</quality><corrupted>0</corrupted><chaosValue>1.00</chaosValue></item>
+		<item name="Awakened Enlighten Support"><level>1</level><quality>0</quality><corrupted>0</corrupted><chaosValue>1.00</chaosValue></item>
+	</class>
+	
+	<class name="ClusterJewels>
+		<!-- We are only looking at jewel base name -->
+		<item name="Large Cluster Jewel">
+			<!-- Large 8-12, Medium  4-6, Small 2-3 -->
+			<passives>12</passives>
+			<!-- Each cluster jewel has a enchantment -->
+			<enchantment>"Minion Damage"</enchantment>
+			<!-- Minimum itemLevel to belong to this catagory 1-100 -->
+			<ilvl>84</ilvl>
+			<chaosValue>1.00</chaosValue>
+		</item>
+		<item name="Medium Cluster Jewel"><passives>8</passives><enchantment>"Flask Duration"</enchantment><ilvl>84</ilvl><chaosValue>1.00</chaosValue></item>
+	</class>
+
+	<class name="Bases">
+		<!-- We are only looking at item base name -->
+		<item name="Sorcerer Boots">
+			<!-- Base items may contain one or more of the following influences -->
+			<shaper>0</shaper>
+			<elder>0</elder>
+			<crusader>1</crusader>
+			<hunter>1</hunter>
+			<redeemer>0</redeemer>
+			<warlord>0</warlord>
+			<!-- Minimum itemLevel to belong to this catagory 1-100 -->
+			<ilvl>86</ilvl>
+			<chaosValue>1.00</chaosValue>
+		</item>
+		<item name="Opal Ring"><shaper>0</shaper><elder>0</elder><crusader>0</crusader><hunter>0</hunter><redeemer>1</redeemer><warlord>1</warlord><ilvl>85</ilvl><chaosValue>1.00</chaosValue></item>
+	</class>
+
+	<!-- class name="Unique Maps" is not a seperate class, they are Uniques -->
+
+	<!-- class name="Sentinels" is not a seperate class, they are Base Types -->
+
+	<!-- class name="Delirium Orbs" is not a seperate class, they are Currency -->
+
+	<!-- class name="Invitations" is not a seperate class, they are Base Types -->
+
+	<!-- class name="Scarabs" is not a seperate class, they are Map Fragments -->
+
+	<!-- class name="Fossils" is not a seperate class, they are Currency -->
+
+	<class name="Delve Stackable Socketable Currency">
+		<item name="Prime Chaotic Resonator">
+			<chaosValue>1.00</chaosValue>
+		</item>
+		<item name="Powerful Chaotic Resonator"><chaosValue>1.00</chaosValue></item>
+		<item name="Potent Chaotic Resonator"><chaosValue>1.00</chaosValue></item>
+		<item name="Primitive Chaotic Resonator"><chaosValue>1.00</chaosValue></item>
+	</class>
+
+	<!-- class name="Beasts" is not really a dropped currency. Ignored. -->
+
+	<!-- class name="Essenses" is not a seperate class, they are Currency -->
+
+	<!-- class name="Vials" is not a seperate class, they are Currency -->
+</snapshot>
