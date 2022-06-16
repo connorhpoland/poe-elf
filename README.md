@@ -23,6 +23,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This means that it is possible to issue a set of queries to the public database to determine the expected/average 'Trade' value of a specific item, or class of item. With a large enough set of queries, a 'Snapshot' or index can be generated which will reflect the current value of all in-game items.
 Fortunatly, https://poe.ninja/ already offers a rather complete and accurate real-time market index we can use for this purpose.</p>
 
+<h2>Demo</h2>
+<p>Path of Exile - Economy-Linked Loot Filter (First Demo)</p>
+
+[![poe-elf-demo](https://img.youtube.com/vi/x8C3kRLIXEw/hqdefault.jpg)](https://youtu.be/x8C3kRLIXEw "Path of Exile - Economy-Linked Loot Filter (First Demo)")
+
 <h2>Description</h2>
 <h3>poe_ninja_xxxx_yy_zz/</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains an example set of .JSON files pulled from poe.ninja using <strong>capture_poeninja.bat</strong> on a given date - xxxx:year yy:month zz:day</p>
