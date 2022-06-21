@@ -10,8 +10,7 @@
 <h2>Environment</h2>
 	<p>Windows 10 Home 21H1 19043.1706<br />
 	Python 3.9.7<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modules: sys, json, xml.etree.ElementTree, datetime, random (optional)<br />
-	curl 7.79.1 (Windows) libcurl/7.79.1 Schannel</p>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modules: sys, json, xml.etree.ElementTree, datetime, requests, random (optional)<br />
 
 <h2>Summary</h2>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This project serves as a proof-of-concept/prototype for a compainon tool to the game Path of Exile. Fundamentilly, this project is a composite of two standalone tools:<br />
@@ -31,8 +30,8 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 <h2>Description</h2>
 <h3>poe_ninja_xxxx_yy_zz/</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains an example set of .JSON files pulled from poe.ninja using <strong>capture_poeninja.bat</strong> on a given date - xxxx:year yy:month zz:day</p>
-<h3>capture_poeninja.bat</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Windows .BAT script utilizing CURL to download poe.ninja market data. This script takes two arguments, league name (ie. Sentinel) and output directory to be populated with .JSON files</p>
+<h3>capture_poeninja.py</h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python program utilizing CURL-like HTTP requests to download poe.ninja market data. This script takes two arguments, league name (ie. Sentinel) and output directory to be populated with .JSON files</p>
 <h3>ELF.filter</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example Path of Exile loot filter file generated using the contained tools.</p>
 <h3>filterConfigs.xml.help</h3>
@@ -51,7 +50,7 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 <h2>Limitations</h2>
 <h3>Index Generator:</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just as in a traditional economy, players with sufficient resources and knowledge of the trade API are able to distort or influence the in-game economy to make very valuable items appear less valuable or vice-versa. This means that our market index will have limited accuracy - ultimately causing situations where other-wise valuable in-game items may be hidden from user of this tool.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The prototype of this tool is heavily utilizing the existing https://poe.ninja tool to aggregate item values which means the stability of this tool will be dependant on the specific API of this websites (poe.ninja API documentation https://github.com/5k-mirrors/misc-poe-tools/blob/master/doc/poe-ninja-api.md). We will utilize CURL to requests to GET a set of JSON files from poe.ninja as the starting point for our index.</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The prototype of this tool is heavily utilizing the existing https://poe.ninja tool to aggregate item values which means the stability of this tool will be dependant on the specific API of this websites (poe.ninja API documentation https://github.com/5k-mirrors/misc-poe-tools/blob/master/doc/poe-ninja-api.md). We will utilize CURL-style HTTP requests (from the request python module) to requests to GET a set of JSON files from poe.ninja as the starting point for our index.</p>
 <h3>Dynamic Filter Generator:</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The primary limitation of this tool (and every 'dynamic' loot filter tool) is that Path of Exile loot filters at stored as a file which is statically loaded and applied to your character when you log-in and it is not updated until the character logs in again or the filter is manually refreshed from the in-game menu. The Path of Exile economy can fluctuate drastically within minutes-to-hours and the fast-pased nature of the game makes it unlikely that a player will be regularly willing to 're-log' or paw through nested setting menues every few minutes. While it is outside the scope of the prototype it may be possible to create a periodic/schedulable macro that can instantly access the in-game menu and refresh the loot filter without disrupting gameplay.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Path of Exile is updated with a major patch quarterly and it is possible (very likely) that these patches will add or modify in-game items or item properties. This means that the Dynamic Filter Generator tool will require quarterly updates to stay usable. The prototype will reflect the in-game filter format imposed by Path of Exile 3.18.<br />
@@ -64,7 +63,7 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 <h3>Standalone Executable:</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A tool such as pyinstaller can turn this tool into a simple executable so that possbile end-users are not burdened with trouble-shooting dependancies.</p>
 <h3>Linux Support:</h3>
-		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The technologies utilized in this tool (python, curl, basic scripting) were selected in part for their nearly trivial portability to Linux. Maintaining Windows and Linux support is intuative as Path of Exile itself if played on both platforms.</p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool has evolved to utilize stictly Python due to it's nearly trivial portability to Linux. Maintaining Windows and Linux support is intuative as Path of Exile itself if played on both platforms.</p>
 <h3>User Experience:</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filterConfigs.xml requires a high level of user knowledge and is not as intuative to modify as other static filter tools Path of Exile players are firmilair with. A UI or additional abstraction layer on this API would be valuable to make this tool more usable/customizable - especially as Path of Exile grows in complexity and the number of 'special' cases explodes.</p>
 <h3>Stackable Currency:</h3>
