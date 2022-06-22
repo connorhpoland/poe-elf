@@ -9,25 +9,25 @@
 # ---------------------------------------------------------------------------
 #   
 #   Usage - filterGen.py generated.filter marketIndex.xml filterConfigs.xml
-#       generated.filter - Path to the local filter file to be created
+#       generated.filter - Name of the local filter file to be created (Full filter path in filterConfigs.xml.help)
 #       marketIndex.xml - Path to a local XML file containing a market index. (See: marketIndex.xml.help)
 #       filterConfigs.xml - Path to a local XML file containing a configuartion preferences for the new filter. (See: filterConfigs.xml.help)
 #
 # ---------------------------------------------------------------------------
-#   Example - python filterGen.py ./ELF.filter ./marketIndex.xml ./filerConfigs.xml
+#   Example - python filterGen.py ELF.filter ./marketIndex.xml ./filerConfigs.xml
 # ---------------------------------------------------------------------------
 import sys
 import xml.etree.ElementTree as ET
 
 USAGE = "\n   USAGE - filterGen.py generated.filter marketIndex.xml filterConfigs.xml\n\
-        generated.filter - Path to the local filter file to be created\n\
+        generated.filter - Name of the local filter file to be created (Full filter path in filterConfigs.xml.help)\n\
         marketIndex.xml - Path to a local XML file containing a market index (See: marketIndex.xml.help)\n\
         filterConfigs.xml - Path to a local XML file containing a configuartion preferences for the new filter. (See: filterConfigs.xml.help)"
 
 #GLOBAL
-filterOutputPath = "./ELF.filter"
+filterOutputPath = "ELF.filter"
 marketIndexPath = "./marketIndex.xml"
-filterConfigPath = "./filterConfigs.xml.help"
+filterConfigPath = "./filterConfigs.xml"
 
 def clearTierData(tierNames, numTiers):
     for tier in range(numTiers):
@@ -70,21 +70,21 @@ def addHideFilterBlock(filterFile, displayTiers, numTiers):
     filterFile.write("Hide #WILDCARD HIDE - Match any not listed above\n")
     filterFile.write(displayTiers[numTiers-1]+"\n")
 
-def main():
+def filterGen(_filterOutputPath, _marketIndexPath, _filterConfigPath):
     #Filter Tiers, Meta - Ordered highest to lowest
     numTiers = 0
     valueTiers = {}
     displayTiers = {}
     
     #Load filterConfig to parse and setup filter tiers
-    filterConfig = ET.parse(filterConfigPath).getroot()
+    filterConfig = ET.parse(_filterConfigPath).getroot()
     for valueTier in filterConfig.iter("tier"):
         valueTiers[numTiers] = float(valueTier.find("chaosValue").text)
         displayTiers[numTiers] = valueTier.find("display").text
         numTiers=numTiers+1
        
     #Open filter file for creation
-    filterFile = open(filterOutputPath, "w")
+    filterFile = open(filterConfig.find("filterPath").text+"./"+_filterOutputPath, "w")
        
     #Special Cases - Filter rules bellonging to a special case need to beed listed first so they dont get hidden
     for staticEntry in filterConfig.iter("static"):
@@ -96,7 +96,7 @@ def main():
     clearTierData(tierNames, numTiers)
     
     #For each class in marketIndex populate a number of filter tiers based on filterConfig
-    marketIndex = ET.parse(marketIndexPath).getroot()
+    marketIndex = ET.parse(_marketIndexPath).getroot()
     for itemClass in marketIndex.iter("class"):
         #Currency-type Class (Just filter by name)
         if(itemClass.get("name") == "Currency" or 
@@ -263,4 +263,4 @@ if __name__ == "__main__":
     elif(len(sys.argv) != 1):
         print(USAGE)
         exit()
-    main()
+    filterGen(filterOutputPath, marketIndexPath, filterConfigPath)

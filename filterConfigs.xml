@@ -1,0 +1,677 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+
+<configs name="Example Filter Configurations">
+
+	<!-- filterConfigs.xml version -->
+	<version>0.0</version>
+	
+	<!-- Path to "Path of Exile" game files -->
+	<filterPath>C:/Users/Conno/OneDrive/Documents/My Games/Path of Exile</filterPath>
+	
+	<!-- Diplay and value properties of user defined loot tiers (Highest tier to lowest ) -->
+	<tier name="Highest Tier">
+		<!-- Minimum value in number of Chaos Orbs to belong in this tier (up to 2 decimal places) -->
+		<chaosValue>100.00</chaosValue>
+		<!-- Loot Filter formatted display configuration -->
+		<display>
+			SetFontSize 45
+			SetTextColor 255 0 0 255
+			SetBorderColor 255 0 0 255
+			SetBackgroundColor 255 255 255 255
+			PlayAlertSound 6 300
+			PlayEffect Red
+			MinimapIcon 0 Red Star
+		</display>
+	</tier>
+	<tier>
+		<chaosValue>10.00</chaosValue>
+		<display>
+			SetFontSize 45
+			SetTextColor 0 0 0 255
+			SetBorderColor 0 0 0 255
+			SetBackgroundColor 240 90 35 255
+			PlayAlertSound 2 300
+			PlayEffect Yellow
+			MinimapIcon 1 Yellow Circle
+		</display>
+	</tier>
+	<tier>
+		<chaosValue>5.00</chaosValue>
+		<display>
+			SetFontSize 40
+			SetTextColor 0 0 0 255
+			SetBorderColor 0 0 0 255
+			SetBackgroundColor 249 150 25 255
+			PlayAlertSound 2 300
+			PlayEffect White
+			MinimapIcon 2 White Circle
+		</display>
+	</tier>
+	<tier name="Lowest Tier">
+		<chaosValue>1.00</chaosValue>
+		<display>
+			SetFontSize 35
+			SetTextColor 0 0 0 255
+			SetBorderColor 0 0 0 255
+			SetBackgroundColor 213 159 0 255
+			PlayAlertSound 2 300
+			PlayEffect White
+			MinimapIcon 2 White Circle
+		</display>
+	</tier>
+	<tier name="Hide Tier">
+		<chaosValue>0.00</chaosValue>
+		<display>
+			SetFontSize 15
+			SetBorderColor 0 0 0 0
+			SetBackgroundColor 0 0 0 0
+			DisableDropSound True
+		</display>
+	</tier>
+	
+	<!-- Static case rules including unvaluable and/or gameplay items -->
+	<static name="6 Link">
+		<display>
+Show
+			LinkedSockets 6
+			SetFontSize 45
+			SetTextColor 200 0 0 255
+			SetBorderColor 200 0 0 255
+			SetBackgroundColor 255 255 255 255
+			PlayAlertSound 6 300
+			PlayEffect Red
+			MinimapIcon 0 Red Star
+		</display>
+	</static>
+	<static name="6 Socket">
+		<display>
+Show
+			Sockets >= 6
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBorderColor 255 255 255 255
+			SetBackgroundColor 155 138 138 255
+			PlayAlertSound 2 300
+			PlayEffect Grey
+			MinimapIcon 2 Grey Hexagon
+		</display>
+	</static>
+	<static name="Chromatic Recipe">
+		<!-- Static rules can be relatively long and/or complex (just as regular filters) -->
+		<display>
+Show
+			Width &lt;= 2
+			Height &lt;= 2
+			Rarity &lt; Rare
+			SocketGroup "RGB"
+			SetFontSize 40
+			SetTextColor 0 0 0 255
+			SetBorderColor 200 200 200 255
+			SetBackgroundColor 130 110 110 255
+Show
+			Width &lt;= 1
+			Height &lt;= 4
+			Rarity &lt; Rare
+			SocketGroup "RGB"
+			SetFontSize 35
+			SetTextColor 0 0 0 255
+			SetBorderColor 200 200 200 255
+			SetBackgroundColor 130 110 110 255
+Show
+			Width >= 2
+			Height >= 4
+			Rarity &lt; Rare
+			SocketGroup "RGB"
+			SetFontSize 30
+			SetTextColor 0 0 0 255
+			SetBorderColor 0 0 0 255
+			SetBackgroundColor 130 110 110 255
+Show
+			Width >= 2
+			Height 3
+			Rarity &lt; Rare
+			SocketGroup "RGB"
+			SetFontSize 25
+			SetTextColor 0 0 0 255
+			SetBorderColor 0 0 0 255
+			SetBackgroundColor 130 110 110 255
+		</display>
+	</static>
+	<static name="Influenced Maps">
+		<display>
+Show
+			HasInfluence Shaper
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 100 0 122 255
+			SetBorderColor 100 0 122 255
+			SetBackgroundColor 255 255 255 255
+			PlayAlertSound 1 300
+			PlayEffect Red
+			MinimapIcon 0 Red Square
+Show
+			HasInfluence Elder
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 100 0 122 255
+			SetBorderColor 100 0 122 255
+			SetBackgroundColor 255 255 255 255
+			PlayAlertSound 1 300
+			PlayEffect Red
+			MinimapIcon 0 Red Square
+Show
+			HasInfluence Crusader Hunter Redeemer Warlord
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 100 0 122 255
+			SetBorderColor 100 0 122 255
+			SetBackgroundColor 255 255 255 255
+			PlayAlertSound 1 300
+			PlayEffect Red
+			MinimapIcon 0 Red Square
+		</display>
+	</static>
+	<static name="Blight Maps">
+		<display>
+Show
+			UberBlightedMap True
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 145 30 220 255
+			SetBorderColor 145 30 220 255
+			SetBackgroundColor 235 220 245 255
+			PlayAlertSound 5 300
+			PlayEffect Purple
+			MinimapIcon 0 Purple Square
+Show
+			BlightedMap True
+			MapTier >= 13
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 145 30 220 255
+			SetBorderColor 145 30 220 255
+			SetBackgroundColor 235 220 245 255
+			PlayAlertSound 5 300
+			PlayEffect Purple
+			MinimapIcon 0 Purple Square
+Show
+			BlightedMap True
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 145 30 220 255
+			SetBorderColor 145 30 220 255
+			SetBackgroundColor 200 200 200 255
+			PlayAlertSound 5 300
+			PlayEffect Purple
+			MinimapIcon 1 Purple Square
+		</display>
+	</static>
+	<static name="Maps">
+		<display>
+#General map decorators
+Show
+			MapTier >= 14
+			Class "Maps"
+			SetBorderColor 0 0 0 255
+			Continue
+Show
+			MapTier >= 11
+			MapTier &lt;= 13
+			Class "Maps"
+			SetBorderColor 0 0 0 255
+			Continue
+Show
+			MapTier >= 6
+			MapTier &lt;= 10
+			Class "Maps"
+			SetBorderColor 200 200 200 255
+			Continue
+Show
+			MapTier >= 1
+			MapTier &lt;= 5
+			Class "Maps"
+			SetBorderColor 200 200 200 255
+			Continue
+#T11-T16 maps
+Show
+			MapTier >= 16
+			AreaLevel &lt; 83
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier >= 16
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 0 0 0 255
+			SetBackgroundColor 235 235 235 255
+			PlayAlertSound 5 300
+			PlayEffect Yellow
+			MinimapIcon 1 Red Square
+Show
+			MapTier >= 15
+			AreaLevel &lt; 82
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 15
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 0 0 0 255
+			SetBackgroundColor 235 235 235 255
+			PlayAlertSound 5 300
+			PlayEffect Yellow
+			MinimapIcon 1 Red Square
+Show
+			MapTier >= 14
+			AreaLevel &lt; 81
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 14
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 0 0 0 255
+			SetBackgroundColor 235 235 235 255
+			PlayAlertSound 5 300
+			PlayEffect Yellow
+			MinimapIcon 1 Red Square
+Show
+			MapTier >= 13
+			AreaLevel &lt; 80
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 13
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 0 0 0 255
+			SetBackgroundColor 200 200 200 255
+			PlayAlertSound 5 300
+			PlayEffect Yellow
+			MinimapIcon 1 Red Square
+Show
+			MapTier >= 12
+			AreaLevel &lt; 79
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 12
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 0 0 0 255
+			SetBackgroundColor 200 200 200 255
+			PlayAlertSound 5 300
+			PlayEffect Yellow
+			MinimapIcon 1 Red Square
+Show
+			MapTier >= 11
+			AreaLevel &lt; 78
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 11
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 0 0 0 255
+			SetBackgroundColor 200 200 200 255
+			PlayAlertSound 5 300
+			PlayEffect Yellow
+			MinimapIcon 1 Red Square
+#T6-T10 maps
+Show
+			MapTier >= 10
+			AreaLevel &lt; 77
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 10
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 1 Yellow Square
+Show
+			MapTier >= 9
+			AreaLevel &lt; 76
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 9
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 1 Yellow Square
+Show
+			MapTier >= 8
+			AreaLevel &lt; 75
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 8
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 1 Yellow Square
+Show
+			MapTier >= 7
+			AreaLevel &lt; 74
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 7
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 1 Yellow Square
+Show
+			MapTier >= 6
+			AreaLevel &lt; 73
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 6
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 1 Yellow Square
+#T1-T5 maps
+Show
+			MapTier >= 5
+			AreaLevel &lt; 72
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 5
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 2 White Square
+Show
+			MapTier >= 4
+			AreaLevel &lt; 71
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 4
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 2 White Square
+Show
+			MapTier >= 3
+			AreaLevel &lt; 70
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 3
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 2 White Square
+Show
+			MapTier >= 2
+			AreaLevel &lt; 69
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 2
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 2 White Square
+Show
+			MapTier >= 1
+			AreaLevel &lt; 68
+			Class "Maps"
+			SetBorderColor 220 50 0 255
+			Continue
+Show
+			MapTier 1
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 2 White Square
+Show
+			Class "Maps"
+			SetFontSize 45
+			SetTextColor 255 0 255 255
+			SetBorderColor 255 0 255 255
+			SetBackgroundColor 100 0 100 255
+			PlayAlertSound 3 300
+			PlayEffect Pink
+			MinimapIcon 0 Pink Circle
+		</display>
+	</static>
+	<static name="Vieled Items">
+		<display>
+Show
+			Identified True
+			Rarity Rare
+			HasExplicitMod "Veiled" "of the Veil" "Catarina's Veiled" "Elreon's Veiled" "Leo's Veiled" "Rin's Veiled" "Vagan's Veiled" "Vorici's Veiled" "Gravicius' Veiled" "Guff's Veiled" "Haku's" "It That Fled's Veiled" "Korell's Veiled" "of Aisling's Veil" "of Cameria's Veil" "of Hillock's Veil" "of Janus' Veil" "of Jorgin's Veil" "Riker" "Tora's Veiled"
+			SetFontSize 45
+			SetBorderColor 0 240 190 255
+			PlayAlertSound 3 300
+			PlayEffect Blue
+			MinimapIcon 2 Blue Diamond
+		</display>
+	</static>
+	<static name="Voidstones">
+		<display>
+Show
+			BaseType "Ceremonial Voidstone" "Decayed Voidstone" "Grasping Voidstone" "Omniscient Voidstone"
+			SetFontSize 45
+			SetTextColor 240 0 0 255
+			SetBorderColor 240 0 0 255
+			SetBackgroundColor 70 0 20 255
+			PlayAlertSound 3 300
+			PlayEffect Orange
+			MinimapIcon 0 Orange Pentagon
+		</display>
+	</static>
+	<static name="Trinkets"> 
+		<display>
+Show
+			Class "Trinkets"
+			SetFontSize 45
+			SetTextColor 240 0 0 255
+			SetBorderColor 240 0 0 255
+			SetBackgroundColor 70 0 20 255
+			PlayAlertSound 3 300
+			PlayEffect Orange
+			MinimapIcon 0 Orange Pentagon
+		</display>
+	</static>
+	<static name="Fishing Rod"> 
+		<display>
+Show	
+			Class "Fishing Rod"
+			SetFontSize 45
+			SetTextColor 240 0 0 255
+			SetBorderColor 240 0 0 255
+			SetBackgroundColor 70 0 20 255
+			PlayAlertSound 3 300
+			PlayEffect Orange
+			MinimapIcon 0 Orange Pentagon
+		</display>
+	</static>
+	<static name="Heist Gear">
+		<display>
+Show
+			Rarity &lt;= Rare
+			BaseType "Whisper-woven Cloak" "Hooded Cloak" "Foliate Brooch" "Enamel Brooch" "Burst Band" "Obsidian Sharpening Stone" "Precise Arrowhead" "Aggregator Charm" "Fine Sharpening Stone" "Hollowpoint Arrowhead" "Grandmaster Keyring" "Master Lockpick" "Regicide Disguise Kit" "Silkweave Sole" "Steel Bracers" "Thaumaturgical Sensing Charm" "Thaumaturgical Ward" "Thaumetic Blowtorch" "Thaumetic Flashpowder" "Azurite Flashpowder" "Espionage Disguise Kit" "Fine Lockpick" "Polished Sensing Charm" "Runed Bracers" "Shining Ward" "Skeleton Keyring" "Sulphur Blowtorch" "Winged Sole"
+			SetFontSize 45
+			SetTextColor 250 165 0 255
+			SetBorderColor 255 85 85 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 3 300
+			PlayEffect Yellow
+			MinimapIcon 1 Yellow Raindrop
+		</display>
+	</static>
+	<static name="Heist Content">
+		<display>
+Show
+			BaseType == "Rogue's Marker"
+			SetFontSize 45
+			SetTextColor 255 178 135 255
+			SetBorderColor 255 178 135 255
+			SetBackgroundColor 150 90 70 255
+			PlayEffect Orange
+Show
+			Rarity Unique
+			Class "Blueprint" "Contract"
+			SetFontSize 45
+			SetTextColor 255 255 255 255
+			SetBorderColor 255 255 255 255
+			SetBackgroundColor 175 96 37 255
+			PlayAlertSound 1 300
+			PlayEffect Yellow
+			MinimapIcon 1 Yellow Star
+Show
+			Class "Contract"
+			SetFontSize 45
+			SetTextColor 220 60 60 255
+			SetBorderColor 220 60 60 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 4 300
+			PlayEffect White
+			MinimapIcon 2 White UpsideDownHouse
+Show
+			Class "Blueprint"
+			SetFontSize 45
+			SetTextColor 255 85 85 255
+			SetBorderColor 255 85 85 255
+			SetBackgroundColor 40 0 30 255
+			PlayAlertSound 5 300
+			PlayEffect Yellow
+			MinimapIcon 1 Yellow UpsideDownHouse
+		</display>
+	</static>
+	<static name="Logbooks">
+		<display>
+Show
+			BaseType "Expedition Logbook"
+			SetFontSize 45
+			SetTextColor 255 85 85 255
+			SetBorderColor 255 85 85 255
+			SetBackgroundColor 40 0 30 255
+			PlayAlertSound 5 300
+			PlayEffect Yellow
+			MinimapIcon 1 Yellow UpsideDownHouse
+Show
+			Class "Expedition Logbook"
+			SetFontSize 45
+			SetTextColor 255 85 85 255
+			SetBorderColor 255 85 85 255
+			SetBackgroundColor 40 0 30 255
+			PlayAlertSound 5 300
+			PlayEffect Yellow
+			MinimapIcon 1 Yellow UpsideDownHouse
+		</display>
+	</static>
+	<static name="Bestiary">
+		<display>
+Show
+			BaseType "Bestiary Orb"
+			SetFontSize 45
+			SetTextColor 74 230 58 255
+			SetBorderColor 74 230 58 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 3 300
+			PlayEffect Green
+			MinimapIcon 0 Green Pentagon
+		</display>
+	</static>
+	<static name="Incursion">
+		<display>
+Show
+			Class "Incursion Item"
+			SetFontSize 45
+			SetTextColor 74 230 58 255
+			SetBorderColor 74 230 58 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 3 300
+			PlayEffect Green
+			MinimapIcon 0 Green Pentagon
+		</display>
+	</static>
+	<static name="Metamorph">
+		<display>
+Show
+			Class "Metamorph"
+			SetFontSize 45
+			SetTextColor 74 230 58 255
+			SetBorderColor 74 230 58 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 3 300
+			PlayEffect Green
+			MinimapIcon 0 Green Pentagon
+		</display>
+	</static>
+	<static name="Pantheon/Quest">
+		<display>
+Show
+			Class "Heist Target"
+			SetFontSize 45
+			SetTextColor 74 230 58 255
+			SetBorderColor 74 230 58 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 3 300
+			PlayEffect Green
+			MinimapIcon 0 Green Pentagon
+Show
+			Class "Pantheon Soul" "Quest"
+			SetFontSize 45
+			SetTextColor 74 230 58 255
+			SetBorderColor 74 230 58 255
+			SetBackgroundColor 0 0 0 255
+			PlayAlertSound 3 300
+			PlayEffect Green
+			MinimapIcon 0 Green Pentagon
+		</display>
+	</static>
+</configs>

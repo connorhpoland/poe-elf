@@ -13,7 +13,7 @@
 #       dumpDir - Path to the directory that will contain all requested poe.ninja JSON files
 #
 # ---------------------------------------------------------------------------
-#   Example - capture_poeninja.py Sentinel ./poe_ninja_2022_06_21
+#   Example - capture_poeninja.py Sentinel ./tmp_poe_ninja
 # ---------------------------------------------------------------------------
 import sys
 import requests
@@ -24,7 +24,7 @@ USAGE = "\n   USAGE - capture_poeninja.py leagueName dumpDir\n\
         
 #GLOBAL
 leagueName = "Sentinel"
-dumpDirPath = "./poe_ninja_2022_06_21"
+dumpDirPath = "./tmp_poe_ninja"
 
 def requestToFile(requestResp, filename):
     #Open file associated with the request
@@ -39,19 +39,19 @@ item_types = {"DivinationCard", "Artifact", "Oil", "Incubator", "UniqueWeapon", 
     "UniqueAccessory", "UniqueFlask", "UniqueJewel", "SkillGem", "ClusterJewel", "Map", "BlightedMap", 
     "BlightRavagedMap", "UniqueMap", "Sentinel", "DeliriumOrb", "Invitation", "Scarab", "BaseType", "Fossil", 
     "Resonator", "HelmetEnchant", "Beast", "Essence", "Vial"}
-def main():
+def capture_poeninja(_leagueName, _dumpDirPath):
     for currency in currency_types:
-        requestResp = requests.get("https://poe.ninja/api/data/currencyoverview?league="+leagueName+"&type="+currency)
+        requestResp = requests.get("https://poe.ninja/api/data/currencyoverview?league="+_leagueName+"&type="+currency)
         if(requestResp.status_code == 200):
-            requestToFile(requestResp, dumpDirPath+"/"+currency+".json")
+            requestToFile(requestResp, _dumpDirPath+"/"+currency+".json")
         else:
-            print("Bad response for "+currency+" in league "+leagueName)
+            print("Bad response for "+currency+" in league "+_leagueName)
     for item in item_types:
-        requestResp = requests.get("https://poe.ninja/api/data/itemoverview?league="+leagueName+"&type="+item)
+        requestResp = requests.get("https://poe.ninja/api/data/itemoverview?league="+_leagueName+"&type="+item)
         if(requestResp.status_code == 200):
-            requestToFile(requestResp, dumpDirPath+"/"+item+".json")
+            requestToFile(requestResp, _dumpDirPath+"/"+item+".json")
         else:
-            print("Bad response for "+item+" in league "+leagueName)
+            print("Bad response for "+item+" in league "+_leagueName)
 
 if __name__ == "__main__":
     #Either specify no args (default) or both
@@ -62,4 +62,4 @@ if __name__ == "__main__":
         print(USAGE)
         exit()
 
-    main()
+    capture_poeninja(leagueName, dumpDirPath)

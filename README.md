@@ -28,14 +28,18 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 [![poe-elf-demo](https://img.youtube.com/vi/x8C3kRLIXEw/hqdefault.jpg)](https://youtu.be/x8C3kRLIXEw "Path of Exile - Economy-Linked Loot Filter (First Demo)")
 
 <h2>Description</h2>
-<h3>poe_ninja_xxxx_yy_zz/</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains an example set of .JSON files pulled from poe.ninja using <strong>capture_poeninja.bat</strong> on a given date - xxxx:year yy:month zz:day</p>
+<h3>poe-elf.py</h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The entry point for this tool. TODO - command line opts</p>
+<h3>tmp_poe_ninja/</h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains an example set of .JSON files pulled from poe.ninja using <strong>capture_poeninja.bat</strong>.</p>
 <h3>capture_poeninja.py</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python program utilizing CURL-like HTTP requests to download poe.ninja market data. This script takes two arguments, league name (ie. Sentinel) and output directory to be populated with .JSON files</p>
 <h3>ELF.filter</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example Path of Exile loot filter file generated using the contained tools.</p>
+<h3>filterConfigs.xml</h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example XML input file for <strong>filterGen.py</strong>. This file is the default input file and should be modifed by the user. Modifying the filterPath inside the file will be critical to automation.</p>
 <h3>filterConfigs.xml.help</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example XML input file for <strong>filterGen.py</strong>. This file contains configurable information related to the the generation of the loot filter including - Number of loot tiers, value associated with each loot tier, and display information for both dynamic and static filter rules</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A barebones example filterConfigs.xml. This file contains configurable information related to the the generation of the loot filter including - Number of loot tiers, value associated with each loot tier, and display information for both dynamic and static filter rules</p>
 <h3>filterGen.py</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python program which generates a new Path of Exile filter file based on a market snapshot file of form <strong>marketIndex.xml.help</strong>, and filter configuration file of form <strong>filterConfigs.xml.help</strong>. The resulting economy-linked loot filter file can be loaded into Path of Exile through the in-game settings</p>
 <h3>marketIndex.xml</h3>
@@ -48,25 +52,25 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python program very similar to <strong>ninja_indexGen.py</strong>. Instead of deriving item value from poe.ninja, this program randomly generates the value of each item - this can be used to debug/demo the dynamic nature of this tool</p>
 
 <h2>Limitations</h2>
-<h3>Index Generator:</h3>
+<h3>Index Generator</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just as in a traditional economy, players with sufficient resources and knowledge of the trade API are able to distort or influence the in-game economy to make very valuable items appear less valuable or vice-versa. This means that our market index will have limited accuracy - ultimately causing situations where other-wise valuable in-game items may be hidden from user of this tool.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The prototype of this tool is heavily utilizing the existing https://poe.ninja tool to aggregate item values which means the stability of this tool will be dependant on the specific API of this websites (poe.ninja API documentation https://github.com/5k-mirrors/misc-poe-tools/blob/master/doc/poe-ninja-api.md). We will utilize CURL-style HTTP requests (from the request python module) to requests to GET a set of JSON files from poe.ninja as the starting point for our index.</p>
-<h3>Dynamic Filter Generator:</h3>
+<h3>Dynamic Filter Generator</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The primary limitation of this tool (and every 'dynamic' loot filter tool) is that Path of Exile loot filters at stored as a file which is statically loaded and applied to your character when you log-in and it is not updated until the character logs in again or the filter is manually refreshed from the in-game menu. The Path of Exile economy can fluctuate drastically within minutes-to-hours and the fast-pased nature of the game makes it unlikely that a player will be regularly willing to 're-log' or paw through nested setting menues every few minutes. While it is outside the scope of the prototype it may be possible to create a periodic/schedulable macro that can instantly access the in-game menu and refresh the loot filter without disrupting gameplay.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Path of Exile is updated with a major patch quarterly and it is possible (very likely) that these patches will add or modify in-game items or item properties. This means that the Dynamic Filter Generator tool will require quarterly updates to stay usable. The prototype will reflect the in-game filter format imposed by Path of Exile 3.18.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Besides in-games items which can be linked to an external market value, there are a number of in-game items which hold limited to no 'Trade' value but must not be hidden in a players loot filter for certain aspects of the game to function - these items must be statically filtered or filtered by some user-preference rather than market value.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool prototype will also not officially support Standard leagues due to increased complexity of legacy items.</p>
 
-<h2>Future Features:</h2>
-<h3>Full Automation:</h3>
+<h2>Future Features</h2>
+<h3>Full Automation</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In this version of the tool, python programs and .bat scripts need to be manually run. Ideally this complexity could be automated and abstracted from the end user.</p>
-<h3>Standalone Executable:</h3>
+<h3>Standalone Executable</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A tool such as pyinstaller can turn this tool into a simple executable so that possbile end-users are not burdened with trouble-shooting dependancies.</p>
-<h3>Linux Support:</h3>
+<h3>Linux Support</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool has evolved to utilize stictly Python due to it's nearly trivial portability to Linux. Maintaining Windows and Linux support is intuative as Path of Exile itself if played on both platforms.</p>
-<h3>User Experience:</h3>
+<h3>User Experience</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filterConfigs.xml requires a high level of user knowledge and is not as intuative to modify as other static filter tools Path of Exile players are firmilair with. A UI or additional abstraction layer on this API would be valuable to make this tool more usable/customizable - especially as Path of Exile grows in complexity and the number of 'special' cases explodes.</p>
-<h3>Stackable Currency:</h3>
+<h3>Stackable Currency</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Currently, we evaluate loot drops as single items however like-currencies are able to drop in stacks. This means you can loot several stacked items in a single click. It goes without saying that the value of a stack of currency is the value of the item times the stack size. In this way we may need to re-tier an item stack if the whole stack falls into a different catagory. Ex. 1 Chaos orb may appear in the lowest filter tier however a stack of 10 Chaos Orbs should be displayed in a higher tier with other items valued ~10 Chaos.</p>
-<h3>Basic Recipes:</h3>
+<h3>Basic Recipes</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In Path of Exile, some items with specific properties can be trivially exchanged in-game for other valuable items (ex. Any 6-Linked item can be sold to any in-game vendor for 1 Divine Orb). This means that there are items that are currently staticly filtered which could instead be mapped to another dynamically indexed item.</p>

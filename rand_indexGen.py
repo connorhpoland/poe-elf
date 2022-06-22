@@ -27,7 +27,7 @@ USAGE = "\n   USAGE - rand_indexGen.py marketIndex.xml dumpDir\n\
 
 #GLOBAL
 marketIndexPath = "./marketIndex.xml"
-dumpDirPath = "./poe_ninja_2022_06_07"
+dumpDirPath = "./tmp_poe_ninja"
 
 #----- Common JSON Utils -----
 def extractJSON(json_file_name):
@@ -119,7 +119,7 @@ def addXMLItemCluster(parent, name, value, ilvl, passives, enchantment):
     return
 
 #Class Currency (Currency.json, Artifact.json, Oil.json, DeliriumOrb.json, Fossil.json, Essence.json, Vial.json)
-def addXMLClassCurrency(parent):
+def addXMLClassCurrency(parent, _dumpDirPath):
     #Create XML class
     newClass = ET.SubElement(parent, "class", name="Currency")
 
@@ -129,19 +129,19 @@ def addXMLClassCurrency(parent):
     #QUIRK The Chaos Orb is not valued by poe.ninja - it's value it inherently known (1.00 Choas Orbs)
     addXMLItemCurrency(newClass, "Chaos Orb", "1.00")
     for file_name in json_files_currency:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["currencyTypeName"], str(item["chaosEquivalent"]))
     for file_name in json_files_item:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
     return
 
 #Map Fragments (Fragment.json, Scarab.json)  
-def addXMLClassFragment(parent):
+def addXMLClassFragment(parent, _dumpDirPath):
     #Create XML class
     newClass = ET.SubElement(parent, "class", name="Map Fragments")
 
@@ -149,47 +149,47 @@ def addXMLClassFragment(parent):
     json_files_currency = {"/Fragment.json"}
     json_files_item = {"/Scarab.json"}
     for file_name in json_files_currency:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["currencyTypeName"], str(item["chaosEquivalent"]))
     for file_name in json_files_item:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
     return
 
 #Divination (DivinationCard.json)
-def addXMLClassDivination(parent):
+def addXMLClassDivination(parent, _dumpDirPath):
     #Create XML class
     newClass = ET.SubElement(parent, "class", name="Divination")
 
     #Parse through JSON data
     json_files = {"/DivinationCard.json"}
     for file_name in json_files:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
     return
 
 #Incubators (Incubator.json)
-def addXMLClassIncubator(parent):
+def addXMLClassIncubator(parent, _dumpDirPath):
     #Create XML class
     newClass = ET.SubElement(parent, "class", name="Incubator")
 
     #Parse through JSON data
     json_files = {"/Incubator.json"}
     for file_name in json_files:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
     return
 
 #Uniques (UniqueWeapon.json, UniqueArmour.json, UniqueAccessory.json, UniqueFlask.json, UniqueJewel.json, UniqueMap.json)
-def addXMLClassUnqiue(parent):
+def addXMLClassUnqiue(parent, _dumpDirPath):
     #This class needs to be handled differently - Multiple uniques can have the same base and drastically different values
     #Loot Filters will not be able to identify the unqiue, so we assign a value to a base based on its highest value unique
     
@@ -201,7 +201,7 @@ def addXMLClassUnqiue(parent):
     replica_dict = {}
     normal_dict = {}
     for file_name in json_files:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 if(item["name"].startswith("Replica")):
@@ -236,7 +236,7 @@ def addXMLClassUnqiue(parent):
     return
 
 #Gems (SkillGem.json)
-def addXMLClassGem(parent):
+def addXMLClassGem(parent, _dumpDirPath):
     #The SkillGem.json file will have an variant attribute that encodes the level, quality, and corruption
     #variant can end with a c to encode corruption
     #variant may have one integer (which encodes level)
@@ -248,7 +248,7 @@ def addXMLClassGem(parent):
     #Parse through JSON data
     json_files = {"/SkillGem.json"}
     for file_name in json_files:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 b_corrupted = item["variant"].endswith("c")
@@ -268,7 +268,7 @@ def addXMLClassGem(parent):
     return
 
 #BaseTypes (BaseType.json, Sentinel.json, Invitation.json)
-def addXMLClassBase(parent):
+def addXMLClassBase(parent, _dumpDirPath):
     #Create XML class
     newClass = ET.SubElement(parent, "class", name="Bases")
 
@@ -276,7 +276,7 @@ def addXMLClassBase(parent):
     json_files_type = {"/BaseType.json"}
     json_files_other = {"/Sentinel.json", "/Invitation.json"}
     for file_name in json_files_type:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 b_shaper = 0
@@ -302,14 +302,14 @@ def addXMLClassBase(parent):
                             b_warlord = 1
                 addXMLItemBase(newClass, item["baseType"], str(item["chaosValue"]), item["levelRequired"], b_shaper, b_elder, b_crusader, b_hunter, b_redeemer, b_warlord)
     for file_name in json_files_other:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemBase(newClass, item["name"], str(item["chaosValue"]), 0, 0, 0, 0, 0, 0, 0)
     return
 
 #Cluster Jewels (ClusterJewel.json)
-def addXMLClassCluster(parent):
+def addXMLClassCluster(parent, _dumpDirPath):
     #Cluster jewel variant contains the string "x passives"
     #Cluster jewel name contains the full enchantment text - we need to parse this to the reduced Loot Filter text
     def parseClusterEnchantment(clusterJewelSize, fullEnchantmentText):
@@ -428,7 +428,7 @@ def addXMLClassCluster(parent):
     #Parse through JSON data
     json_files = {"/ClusterJewel.json"}
     for file_name in json_files:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 parse_variant = item["variant"].split(" ")
@@ -436,24 +436,24 @@ def addXMLClassCluster(parent):
     return
 
 #Delve Stackable Socketable Currency (Resonator.json)
-def addXMLClassResonator(parent):
+def addXMLClassResonator(parent, _dumpDirPath):
     #Create XML class
     newClass = ET.SubElement(parent, "class", name="Delve Stackable Socketable Currency")
 
     #Parse through JSON data
     json_files={"/Resonator.json"}
     for file_name in json_files:
-        json_data = extractJSON(dumpDirPath+file_name)
+        json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
     return
 
 #Ignored (Beast.json, BlightedMap.json, BlightRavagedMap.json, HelmetEnchant.json, Map.json)
-def addXMLClassEtc(parent):
+def addXMLClassEtc(parent, _dumpDirPath):
     return
 
-def main():
+def indexGen(_marketIndexPath, _dumpDirPath):
     #Start the marketIndex.xml tree with the root structure <snapshot>
     marketSnapshot = ET.Element("snapshot", name="rand_indexGen.py Market Index")
 
@@ -467,29 +467,29 @@ def main():
 
     #Generate each item class XML tree under marketSnapshot
     #Currency
-    addXMLClassCurrency(marketSnapshot)
+    addXMLClassCurrency(marketSnapshot, _dumpDirPath)
     #Map Fragments
-    addXMLClassFragment(marketSnapshot)
+    addXMLClassFragment(marketSnapshot, _dumpDirPath)
     #Divination
-    addXMLClassDivination(marketSnapshot)
+    addXMLClassDivination(marketSnapshot, _dumpDirPath)
     #Incubators
-    addXMLClassIncubator(marketSnapshot)
+    addXMLClassIncubator(marketSnapshot, _dumpDirPath)
     #Uniques
-    addXMLClassUnqiue(marketSnapshot)
+    addXMLClassUnqiue(marketSnapshot, _dumpDirPath)
     #Gems
-    addXMLClassGem(marketSnapshot)
+    addXMLClassGem(marketSnapshot, _dumpDirPath)
     #BaseTypes
-    addXMLClassBase(marketSnapshot)
+    addXMLClassBase(marketSnapshot, _dumpDirPath)
     #Cluster Jewels
-    addXMLClassCluster(marketSnapshot)
+    addXMLClassCluster(marketSnapshot, _dumpDirPath)
     #Delve Stackable Socketable Currency
-    addXMLClassResonator(marketSnapshot)
+    addXMLClassResonator(marketSnapshot, _dumpDirPath)
     #Other/Etc
-    addXMLClassEtc(marketSnapshot)
+    addXMLClassEtc(marketSnapshot, _dumpDirPath)
 
     #Dump the full XML tree to marketIndex.xml file path
     xmlTree = ET.ElementTree(marketSnapshot)
-    xmlTree.write(marketIndexPath, xml_declaration=True, encoding="utf-8")
+    xmlTree.write(_marketIndexPath, xml_declaration=True, encoding="utf-8")
 
 if __name__ == "__main__":
     #Either specify no args (default) or both
@@ -500,4 +500,4 @@ if __name__ == "__main__":
         print(USAGE)
         exit()
 
-    main()
+    indexGen(marketIndexPath, dumpDirPath)
