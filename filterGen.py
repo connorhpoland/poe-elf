@@ -9,23 +9,23 @@
 # ---------------------------------------------------------------------------
 #   
 #   Usage - filterGen.py generated.filter marketIndex.xml filterConfigs.xml
-#       generated.filter - Name of the local filter file to be created (Full filter path in filterConfigs.xml.help)
+#       generated.filter - Path to the local filter file to be created
 #       marketIndex.xml - Path to a local XML file containing a market index. (See: marketIndex.xml.help)
 #       filterConfigs.xml - Path to a local XML file containing a configuartion preferences for the new filter. (See: filterConfigs.xml.help)
 #
 # ---------------------------------------------------------------------------
-#   Example - python filterGen.py ELF.filter ./marketIndex.xml ./filerConfigs.xml
+#   Example - python filterGen.py ./ELF.filter ./marketIndex.xml ./filerConfigs.xml
 # ---------------------------------------------------------------------------
 import sys
 import xml.etree.ElementTree as ET
 
 USAGE = "\n   USAGE - filterGen.py generated.filter marketIndex.xml filterConfigs.xml\n\
-        generated.filter - Name of the local filter file to be created (Full filter path in filterConfigs.xml.help)\n\
+        generated.filter - Path to the local filter file to be created\n\
         marketIndex.xml - Path to a local XML file containing a market index (See: marketIndex.xml.help)\n\
         filterConfigs.xml - Path to a local XML file containing a configuartion preferences for the new filter. (See: filterConfigs.xml.help)"
 
 #GLOBAL
-filterOutputPath = "ELF.filter"
+filterOutputPath = "./ELF.filter"
 marketIndexPath = "./marketIndex.xml"
 filterConfigPath = "./filterConfigs.xml"
 
@@ -84,7 +84,7 @@ def filterGen(_filterOutputPath, _marketIndexPath, _filterConfigPath):
         numTiers=numTiers+1
        
     #Open filter file for creation
-    filterFile = open(filterConfig.find("filterPath").text+"./"+_filterOutputPath, "w")
+    filterFile = open(_filterOutputPath, "w")
        
     #Special Cases - Filter rules bellonging to a special case need to beed listed first so they dont get hidden
     for staticEntry in filterConfig.iter("static"):

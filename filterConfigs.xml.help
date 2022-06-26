@@ -5,9 +5,6 @@
 	<!-- filterConfigs.xml version -->
 	<version>0.0</version>
 	
-	<!-- Path to "Path of Exile" game files -->
-	<filterPath>./</filterPath>
-	
 	<!-- Diplay and value properties of user defined loot tiers (Highest tier to lowest ) -->
 	<tier name="Highest Tier">
 		<!-- Minimum value in number of Chaos Orbs to belong in this tier (up to 2 decimal places) -->
