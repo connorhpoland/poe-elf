@@ -16,6 +16,8 @@
 # ---------------------------------------------------------------------------
 #   Example - python filterGen.py ./ELF.filter ./marketIndex.xml ./filerConfigs.xml
 # ---------------------------------------------------------------------------
+# -*- coding: utf-8 -*-
+
 import sys
 import xml.etree.ElementTree as ET
 
@@ -84,7 +86,7 @@ def filterGen(_filterOutputPath, _marketIndexPath, _filterConfigPath):
         numTiers=numTiers+1
        
     #Open filter file for creation
-    filterFile = open(_filterOutputPath, "w")
+    filterFile = open(_filterOutputPath, "w", encoding="utf-8")
        
     #Special Cases - Filter rules bellonging to a special case need to beed listed first so they dont get hidden
     for staticEntry in filterConfig.iter("static"):

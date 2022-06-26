@@ -15,6 +15,8 @@
 # ---------------------------------------------------------------------------
 #   Example - python rand_indexGen.py ./marketIndex.xml ./poe_ninja_2022_06_07
 # ---------------------------------------------------------------------------
+# -*- coding: utf-8 -*-
+
 import sys
 import json
 import xml.etree.ElementTree as ET

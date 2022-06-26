@@ -15,6 +15,8 @@
 # ---------------------------------------------------------------------------
 #   Example - capture_poeninja.py Sentinel ./tmp_poe_ninja
 # ---------------------------------------------------------------------------
+# -*- coding: utf-8 -*-
+
 import sys
 import requests
 
@@ -28,7 +30,7 @@ dumpDirPath = "./tmp_poe_ninja"
 
 def requestToFile(requestResp, filename):
     #Open file associated with the request
-    dumpFile = open(filename, "w")
+    dumpFile = open(filename, "w", encoding="utf-8")
     if(dumpFile):
         dumpFile.write(requestResp.text)
         print(filename+" OK!")
