@@ -86,7 +86,7 @@ def filterGen(_filterOutputPath, _marketIndexPath, _filterConfigPath):
         numTiers=numTiers+1
        
     #Open filter file for creation
-    filterFile = open(_filterOutputPath, "w", encoding="utf-8")
+    filterFile = open(_filterOutputPath, "w")
        
     #Special Cases - Filter rules bellonging to a special case need to beed listed first so they dont get hidden
     for staticEntry in filterConfig.iter("static"):
