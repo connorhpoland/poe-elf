@@ -30,20 +30,12 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 <h2>Description</h2>
 <h3>poe-elf.py</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The entry point for this tool. TODO - command line opts</p>
-<h3>tmp_poe_ninja/</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains an example set of .JSON files pulled from poe.ninja using <strong>capture_poeninja.bat</strong>.</p>
 <h3>capture_poeninja.py</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python program utilizing CURL-like HTTP requests to download poe.ninja market data. This script takes two arguments, league name (ie. Sentinel) and output directory to be populated with .JSON files</p>
-<h3>ELF.filter</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example Path of Exile loot filter file generated using the contained tools.</p>
-<h3>filterConfigs.xml</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example XML input file for <strong>filterGen.py</strong>. This file is the default input file and should be modifed by the user. Modifying the filterPath inside the file will be critical to automation.</p>
 <h3>filterConfigs.xml.help</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A barebones example filterConfigs.xml. This file contains configurable information related to the the generation of the loot filter including - Number of loot tiers, value associated with each loot tier, and display information for both dynamic and static filter rules</p>
 <h3>filterGen.py</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python program which generates a new Path of Exile filter file based on a market snapshot file of form <strong>marketIndex.xml.help</strong>, and filter configuration file of form <strong>filterConfigs.xml.help</strong>. The resulting economy-linked loot filter file can be loaded into Path of Exile through the in-game settings</p>
-<h3>marketIndex.xml</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example marketIndex.xml file generated using <strong>ninja_indexGen.py</strong> and real poe.ninja economy data found in <strong>poe_ninja_2022_06_15</strong></p>
 <h3>marketIndex.xml.help</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A more readable example marketIndex.xml file with in-line comments to describe format requirements. This is not a complete index file.</p>
 <h3>ninja_indexGen.py</h3>

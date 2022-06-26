@@ -5,3 +5,9 @@ __pycache__/
 #Ignore changes to tmp_poe_ninja
 tmp_poe_ninja/
 *.json
+
+#Ignore locally generated .filter file
+*.filter
+
+#Ignore locally generated marketIndex.xml
+marketIndex.xml
