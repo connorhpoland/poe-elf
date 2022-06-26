@@ -27,6 +27,10 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 
 [![poe-elf-demo](https://img.youtube.com/vi/x8C3kRLIXEw/hqdefault.jpg)](https://youtu.be/x8C3kRLIXEw "Path of Exile - Economy-Linked Loot Filter (First Demo)")
 
+<p>Path of Exile - Economy-Linked Loot Filter (Quick Start Guide)</p>
+
+[![poe-elf-qs](https://img.youtube.com/vi/MK8llofCZBI/hqdefault.jpg)](https://youtu.be/MK8llofCZBI "Path of Exile - Economy-Linked Loot Filter (Quick Start Guide)")
+
 <h2>Description</h2>
 <h3>poe-elf.py</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The entry point for this tool. TODO - command line opts</p>
