@@ -59,10 +59,10 @@ if __name__ == "__main__":
     config = configparser.ConfigParser()
     config.read(configPath)
     if("POE" in config):
-        if("leagueName" in config["LOCAL"]):
-            leagueName = config["LOCAL"].get("leagueName")
-        if("filterOutputPath" in config["LOCAL"]):
-            filterOutputPath = config["LOCAL"].get("filterOutputPath")   
+        if("leagueName" in config["POE"]):
+            leagueName = config["POE"].get("leagueName")
+        if("filterOutputPath" in config["POE"]):
+            filterOutputPath = config["POE"].get("filterOutputPath")
     if("LOCAL" in config):
         if("dumpDirPath" in config["LOCAL"]):
             dumpDirPath = config["LOCAL"].get("dumpDirPath")
