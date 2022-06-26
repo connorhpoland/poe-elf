@@ -25,7 +25,7 @@ import filterGen as GENERATE
 #GLOBAL
 leagueName = "Sentinel"
 dumpDirPath = "./tmp_poe_ninja"
-filterOutputPath = "ELF.filter"
+filterOutputPath = "./ELF.filter"
 marketIndexPath = "./marketIndex.xml"
 filterConfigPath = "./filterConfigs.xml"
 refreshInterval = "3"
