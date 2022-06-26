@@ -3,4 +3,5 @@ __pycache__/
 *.py[cod]
 
 #Ignore changes to tmp_poe_ninja
-tmp_poe_ninja/*.json
+tmp_poe_ninja/
+*.json
