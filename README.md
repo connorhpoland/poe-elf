@@ -10,7 +10,7 @@
 <h2>Environment</h2>
 	<p>Windows 10 Home 21H1 19043.1706<br />
 	Python 3.9.7<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modules: sys, json, xml.etree.ElementTree, datetime, requests, random (optional)<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modules: sys, json, xml.etree.ElementTree, datetime, requests, random, configparser, time<br />
 
 <h2>Summary</h2>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This project serves as a proof-of-concept/prototype for a compainon tool to the game Path of Exile. Fundamentilly, this project is a composite of two standalone tools:<br />
@@ -30,6 +30,8 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 <h2>Description</h2>
 <h3>poe-elf.py</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The entry point for this tool. TODO - command line opts</p>
+<h3>elf.config</h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User modifiable config file that defines the behaviour of <strong>poe-elf.py</strong></p>
 <h3>capture_poeninja.py</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python program utilizing CURL-like HTTP requests to download poe.ninja market data. This script takes two arguments, league name (ie. Sentinel) and output directory to be populated with .JSON files</p>
 <h3>filterConfigs.xml.help</h3>
