@@ -10,7 +10,7 @@
 <h2>Environment</h2>
 	<p>Windows 10 Home 21H1 19043.1706<br />
 	Python 3.9.7<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modules: sys, json, xml.etree.ElementTree, datetime, requests, random, configparser, time<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool utilizes pyinstaller to hopefully package all dependancies in our .exe<br />
 
 <h2>Summary</h2>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This project serves as a proof-of-concept/prototype for a compainon tool to the game Path of Exile. Fundamentilly, this project is a composite of two standalone tools:<br />
@@ -56,10 +56,6 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool prototype will also not officially support Standard leagues due to increased complexity of legacy items.</p>
 
 <h2>Future Features</h2>
-<h3>Full Automation</h3>
-		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In this version of the tool, python programs and .bat scripts need to be manually run. Ideally this complexity could be automated and abstracted from the end user.</p>
-<h3>Standalone Executable</h3>
-		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A tool such as pyinstaller can turn this tool into a simple executable so that possbile end-users are not burdened with trouble-shooting dependancies.</p>
 <h3>Linux Support</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool has evolved to utilize stictly Python due to it's nearly trivial portability to Linux. Maintaining Windows and Linux support is intuative as Path of Exile itself if played on both platforms.</p>
 <h3>User Experience</h3>

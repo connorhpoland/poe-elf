@@ -1,10 +1,11 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+build/
+*.spec
 
 #Ignore changes to tmp_poe_ninja
-tmp_poe_ninja/
-*.json
+tmp_poe_ninja/*.json
 
 #Ignore locally generated .filter file
 *.filter
