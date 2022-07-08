@@ -2,9 +2,9 @@
 <h1>Path of Exile - Economy-Linked Loot Filter</h1>
 
 <p>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Connor Poland</strong><br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;github.com/connorhpoland<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;June 15, 2022<br />
+	<strong>Connor Poland</strong><br />
+	github.com/connorhpoland<br />
+	June 15, 2022<br />
 </p>
 
 <h2>Environment</h2>
