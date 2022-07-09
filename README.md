@@ -4,13 +4,13 @@
 <p>
 	<strong>Connor Poland</strong><br />
 	github.com/connorhpoland<br />
-	June 15, 2022<br />
+	July 9, 2022<br />
 </p>
 
 <h2>Environment</h2>
 	<p>Windows 10 Home 21H1 19043.1706<br />
-	Python 3.9.7<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool utilizes pyinstaller to hopefully package all dependancies in our .exe<br />
+	Python 3.10.5<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PyInstaller is used to package module dependancies into our .exe<br />
 
 <h2>Summary</h2>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This project serves as a proof-of-concept/prototype for a compainon tool to the game Path of Exile. Fundamentilly, this project is a composite of two standalone tools:<br />

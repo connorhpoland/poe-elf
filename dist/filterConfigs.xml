@@ -3,7 +3,7 @@
 <configs name="Example Filter Configurations">
 
 	<!-- filterConfigs.xml version -->
-	<version>0.0</version>
+	<version>1.0</version>
 	
 	<!-- Diplay and value properties of user defined loot tiers (Highest tier to lowest ) -->
 	<tier name="Highest Tier">

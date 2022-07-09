@@ -3,10 +3,10 @@
 <snapshot name="Example Market Snapshot">
 
 	<!-- marketIndex.xml version -->
-	<version>0.0</version>
+	<version>1.0</version>
 	
 	<!-- index creation date (yyyy-mm-dd-hh:mm) -->
-	<date>2022-06-06-21:30</date>
+	<date>2022-07-09-21:30</date>
 	
 	<!-- Items are seperated by classes (Based on poe.ninja classes) -->
 	<class name="Currency">

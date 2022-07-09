@@ -4,7 +4,7 @@
 <p>
 	<strong>Connor Poland</strong><br />
 	github.com/connorhpoland<br />
-	June 15, 2022<br />
+	July 9, 2022<br />
 </p>
 
 <h2>Getting Started</h2>
