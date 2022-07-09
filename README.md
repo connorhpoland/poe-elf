@@ -60,7 +60,7 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool prototype will also not officially support Standard leagues due to increased complexity of legacy items.</p>
 
 <h2>Future Features</h2>
-<h3>poe-elf.exe cmd args</h3>
+<h3>Command Line Options</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ideally, some or all of the elf.config configuration items should be command-line configurable. This is not likely to be a popular use-case so this is low priority.</p>
 <h3>Linux Support</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool has evolved to utilize stictly Python due to it's nearly trivial portability to Linux. Maintaining Windows and Linux support is intuative as Path of Exile itself if played on both platforms.</p>

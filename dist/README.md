@@ -24,8 +24,15 @@
 			<li>Select the dist/ directory that holds poe-elf.exe</li>
 		</ol>
 	<li>Configure Local dist/elf.config</li>
+		<ol>Modify 'leagueName' to desired Path of Exile League (ex. Sentinel, Sentinel HC)</ol>
+		<ol>Modify 'filterOutputPath' to be the path to your local Path of Exile Game files (ex. C:\Users\Foo\Documents\My Games\Path of Exile\new.filter) </ol>
+	<li>Run poe-elf.exe</li>
+		<p>A command prompt will open and begin running the poe-elf application. After a short time, a tone and log message will indicate a new filter is ready.</p>
+		<p>In Path of Exile, load the generated filter file with the name configured in elf.config earlier.</p>
+		<p>poe-elf will generate an up-to-date filter file every 15 minutes. It will be necissary to 'refresh' your loot filter in-game to utilize the latest update.</p>
 </ol>
 
 <h2>Advanced</h2>
-<h3>poe-elf.py</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The entry point for this tool. TODO - command line opts</p>
+<h3>poe.config</h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This file contains a set on run-time configurations that will be applied to poe-elf.exe when it first starts.</p>
+
