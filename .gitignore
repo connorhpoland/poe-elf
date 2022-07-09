@@ -12,3 +12,6 @@ tmp_poe_ninja/*.json
 
 #Ignore locally generated marketIndex.xml
 marketIndex.xml
+
+#Ignore WinMerge .bak files
+*.bak
