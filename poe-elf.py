@@ -35,6 +35,7 @@ randomValue = 0
 refreshNotify = 1
 loggingLevel = 40 #ERROR
 loggingPath = 0
+filterRetryCount = 3
 
 configPath = "./elf.config"
 
@@ -42,32 +43,35 @@ def getVersion():
     return version
 
 def poe_elf():
-    bRetry = 0
+    nRetry = 0
     while(1):
-        if(not bRetry):
+        if(nRetry == 0):
             starttime = time.time()
             logging.info("Starting to generate new filter")
+        elif (nRetry > filterRetryCount):
+            logging.error("Failed to generate filter after "+str(filterRetryCount)+" attempts. Review logs and configurations.")
+            return 1
         if(CAPTURE.capture_poeninja(leagueName, dumpDirPath)):
+            nRetry += 1
             logging.error("Failed to capture poeninja data... Restarting filter generation")
-            bRetry = 1
             continue
         if(randomValue):
             if(RAND_INDEX.indexGen(marketIndexPath, dumpDirPath)):
+                nRetry += 1
                 logging.error("Failed to parse (random) economy data into index... Restarting filter generation")
-                bRetry = 1
                 continue
         else:
             if(INDEX.indexGen(marketIndexPath, dumpDirPath)):
+                nRetry += 1
                 logging.error("Failed to parse economy data into index... Restarting filter generation")
-                bRetry = 1
                 continue
         if(GENERATE.filterGen(filterOutputPath, marketIndexPath, filterConfigPath)):
+            nRetry += 1
             logging.error("Failed to create filter from market index... Restarting filter generation")
-            bRetry = 1
             continue
         
         #Filter done!
-        bRetry = 0
+        nRetry = 0
         logging.critical("New filter generated! "+filterOutputPath)
         if(refreshNotify):
             print("\a")
@@ -79,7 +83,7 @@ def poe_elf():
                 logging.info("Sleeping for "+str(sleeptime)+" seconds before generating another filter")
                 time.sleep(sleeptime)
         else:
-            exit()
+            return 0
 
 if __name__ == "__main__":
     #Load GLOBAL defaults (implicit)
@@ -142,6 +146,7 @@ if __name__ == "__main__":
         
     try: 
         poe_elf()
+        logging.critical("Shutting down poe-elf")
     except KeyboardInterrupt:
         logging.critical("Shutting down poe-elf (Interrupt Recv'd)")
     except:

@@ -84,7 +84,13 @@ def filterGen(_filterOutputPath, _marketIndexPath, _filterConfigPath):
     displayTiers = {}
     
     #Load filterConfig to parse and setup filter tiers
-    filterConfig = ET.parse(_filterConfigPath).getroot()
+    try:
+        filterConfig = ET.parse(_filterConfigPath).getroot()
+    except:
+        log_.error("File "+_filterConfigPath+" cannot be openned or parsed as XML")
+        return 1 #ERROR
+    else:
+        _log.info("Openned and parsed XML file "+_filterConfigPath)
     for valueTier in filterConfig.iter("tier"):
         valueTiers[numTiers] = float(valueTier.find("chaosValue").text)
         displayTiers[numTiers] = valueTier.find("display").text
@@ -107,7 +113,14 @@ def filterGen(_filterOutputPath, _marketIndexPath, _filterConfigPath):
     clearTierData(tierNames, numTiers)
     
     #For each class in marketIndex populate a number of filter tiers based on filterConfig
-    marketIndex = ET.parse(_marketIndexPath).getroot()
+    try:
+        marketIndex = ET.parse(_marketIndexPath).getroot()
+    except:
+        _log.error("Market index XML file "+_marketIndexPath+" could not be openned or created")
+        filterFile.close()
+        return 1 #ERROR
+    else:
+        _log.info("Openned (or created) market index XML file "+_marketIndexPath)
     for itemClass in marketIndex.iter("class"):
         #Currency-type Class (Just filter by name)
         if(itemClass.get("name") == "Currency" or 

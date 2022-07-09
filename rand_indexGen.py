@@ -40,14 +40,14 @@ def getVersion():
 def extractJSON(json_file_name):
     try:
         file_handle = open(json_file_name)
-    except FileNotFoundError:
-        print("extractJSON: FileNotFoundError - "+json_file_name)
+    except:
+        _log.error("JSON file "+json_file_name+" cannot be openned")
         return 0
         
     try:
         json_data = json.load(file_handle)
-    except JSONDecodeError:
-        print("extractJSON: JSONDecodeError - "+json_file_name+" - Not a valid JSON documenmt")
+    except:
+        _log.error("JSON file "+json_file_name+" not a valid JSON documenmt")
         file_handle.close()
         return 0
     
@@ -140,12 +140,16 @@ def addXMLClassCurrency(parent, _dumpDirPath):
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["currencyTypeName"], str(item["chaosEquivalent"]))
+        else:
+            return 1 #ERROR - missing filter data
     for file_name in json_files_item:
         json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
-    return
+        else:
+            return 1 #ERROR - missing filter data
+    return 0
 
 #Map Fragments (Fragment.json, Scarab.json)  
 def addXMLClassFragment(parent, _dumpDirPath):
@@ -160,12 +164,16 @@ def addXMLClassFragment(parent, _dumpDirPath):
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["currencyTypeName"], str(item["chaosEquivalent"]))
+        else:
+            return 1 #ERROR - missing filter data
     for file_name in json_files_item:
         json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
-    return
+        else:
+            return 1 #ERROR - missing filter data
+    return 0
 
 #Divination (DivinationCard.json)
 def addXMLClassDivination(parent, _dumpDirPath):
@@ -179,7 +187,9 @@ def addXMLClassDivination(parent, _dumpDirPath):
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
-    return
+        else:
+            return 1 #ERROR - missing filter data
+    return 0
 
 #Incubators (Incubator.json)
 def addXMLClassIncubator(parent, _dumpDirPath):
@@ -193,7 +203,9 @@ def addXMLClassIncubator(parent, _dumpDirPath):
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
-    return
+        else:
+            return 1 #ERROR - missing filter data
+    return 0
 
 #Uniques (UniqueWeapon.json, UniqueArmour.json, UniqueAccessory.json, UniqueFlask.json, UniqueJewel.json, UniqueMap.json)
 def addXMLClassUnqiue(parent, _dumpDirPath):
@@ -225,6 +237,8 @@ def addXMLClassUnqiue(parent, _dumpDirPath):
                         dictSetIfGreater(normal_dict, "6L_"+item["baseType"], item["chaosValue"])
                     elif(item["links"] == 5):
                         dictSetIfGreater(normal_dict, "5L_"+item["baseType"], item["chaosValue"])
+        else:
+            return 1 #ERROR - missing filter data
     for baseType in replica_dict:
         temp_links = 0
         if(baseType.startswith("6L_")):
@@ -240,7 +254,7 @@ def addXMLClassUnqiue(parent, _dumpDirPath):
             addXMLItemUnique(newClass, baseType[3:], str(normal_dict[baseType]), 0, 5)
         else:
             addXMLItemUnique(newClass, baseType, str(normal_dict[baseType]), 0, 0)
-    return
+    return 0
 
 #Gems (SkillGem.json)
 def addXMLClassGem(parent, _dumpDirPath):
@@ -272,7 +286,9 @@ def addXMLClassGem(parent, _dumpDirPath):
                 else:
                     #Non-0 Quality
                     addXMLItemGem(newClass, item["name"], str(item["chaosValue"]), parse_variant[0], parse_variant[1], b_corrupted)
-    return
+        else:
+            return 1 #ERROR - missing filter data
+    return 0
 
 #BaseTypes (BaseType.json, Sentinel.json, Invitation.json)
 def addXMLClassBase(parent, _dumpDirPath):
@@ -308,12 +324,16 @@ def addXMLClassBase(parent, _dumpDirPath):
                         elif(influence == "Warlord"):
                             b_warlord = 1
                 addXMLItemBase(newClass, item["baseType"], str(item["chaosValue"]), item["levelRequired"], b_shaper, b_elder, b_crusader, b_hunter, b_redeemer, b_warlord)
+        else:
+            return 1 #ERROR - missing filter data
     for file_name in json_files_other:
         json_data = extractJSON(_dumpDirPath+file_name)
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemBase(newClass, item["name"], str(item["chaosValue"]), 0, 0, 0, 0, 0, 0, 0)
-    return
+        else:
+            return 1 #ERROR - missing filter data
+    return 0
 
 #Cluster Jewels (ClusterJewel.json)
 def addXMLClassCluster(parent, _dumpDirPath):
@@ -440,7 +460,9 @@ def addXMLClassCluster(parent, _dumpDirPath):
             for item in json_data["lines"]:
                 parse_variant = item["variant"].split(" ")
                 addXMLItemCluster(newClass, item["baseType"], str(item["chaosValue"]), item["levelRequired"], parse_variant[0], parseClusterEnchantment(item["baseType"], item["name"]))
-    return
+        else:
+            return 1 #ERROR - missing filter data
+    return 0
 
 #Delve Stackable Socketable Currency (Resonator.json)
 def addXMLClassResonator(parent, _dumpDirPath):
@@ -454,11 +476,13 @@ def addXMLClassResonator(parent, _dumpDirPath):
         if(json_data != 0):
             for item in json_data["lines"]:
                 addXMLItemCurrency(newClass, item["name"], str(item["chaosValue"]))
-    return
+        else:
+            return 1 #ERROR - missing filter data
+    return 0
 
 #Ignored (Beast.json, BlightedMap.json, BlightRavagedMap.json, HelmetEnchant.json, Map.json)
 def addXMLClassEtc(parent, _dumpDirPath):
-    return
+    return 0
 
 def indexGen(_marketIndexPath, _dumpDirPath):
     #Start the marketIndex.xml tree with the root structure <snapshot>
@@ -474,29 +498,53 @@ def indexGen(_marketIndexPath, _dumpDirPath):
 
     #Generate each item class XML tree under marketSnapshot
     #Currency
-    addXMLClassCurrency(marketSnapshot, _dumpDirPath)
+    if(addXMLClassCurrency(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class Currency, cannot generate index")
+        return 1 #ERROR
     #Map Fragments
-    addXMLClassFragment(marketSnapshot, _dumpDirPath)
+    if(addXMLClassFragment(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class Fragment, cannot generate index")
+        return 1 #ERROR
     #Divination
-    addXMLClassDivination(marketSnapshot, _dumpDirPath)
+    if(addXMLClassDivination(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class Divination, cannot generate index")
+        return 1 #ERROR
     #Incubators
-    addXMLClassIncubator(marketSnapshot, _dumpDirPath)
+    if(addXMLClassIncubator(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class Incubator, cannot generate index")
+        return 1 #ERROR
     #Uniques
-    addXMLClassUnqiue(marketSnapshot, _dumpDirPath)
+    if(addXMLClassUnqiue(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class Unique, cannot generate index")
+        return 1 #ERROR
     #Gems
-    addXMLClassGem(marketSnapshot, _dumpDirPath)
+    if(addXMLClassGem(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class Gem, cannot generate index")
+        return 1 #ERROR
     #BaseTypes
-    addXMLClassBase(marketSnapshot, _dumpDirPath)
+    if(addXMLClassBase(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class BaseType, cannot generate index")
+        return 1 #ERROR
     #Cluster Jewels
-    addXMLClassCluster(marketSnapshot, _dumpDirPath)
+    if(addXMLClassCluster(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class Cluster, cannot generate index")
+        return 1 #ERROR
     #Delve Stackable Socketable Currency
-    addXMLClassResonator(marketSnapshot, _dumpDirPath)
+    if(addXMLClassResonator(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class Resonator, cannot generate index")
+        return 1 #ERROR
     #Other/Etc
-    addXMLClassEtc(marketSnapshot, _dumpDirPath)
+    if(addXMLClassEtc(marketSnapshot, _dumpDirPath)):
+        _log.error("Missing poe.ninja data for class Other, cannot generate index")
+        return 1 #ERROR
 
     #Dump the full XML tree to marketIndex.xml file path
     xmlTree = ET.ElementTree(marketSnapshot)
-    xmlTree.write(_marketIndexPath, xml_declaration=True, encoding="utf-8")
+    try:
+        xmlTree.write(_marketIndexPath, xml_declaration=True, encoding="utf-8")
+    except:
+        _log.error("Failed to write in-memory index XML to file "+_marketIndexPath)
+        return 1 #EORROR
     
     return 0 #OK
 
