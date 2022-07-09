@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------
 # Created By  : Connor Poland
 # Created Date: 2022-06-06
-# version ='0.0'
+version = "0.0"
 # ---------------------------------------------------------------------------
 #   Path of Exile - Economy-Linked Loot Filter
 # ---------------------------------------------------------------------------
@@ -20,6 +20,7 @@
 
 import sys
 import xml.etree.ElementTree as ET
+import logging
 
 USAGE = "\n   USAGE - filterGen.py generated.filter marketIndex.xml filterConfigs.xml\n\
         generated.filter - Path to the local filter file to be created\n\
@@ -30,6 +31,10 @@ USAGE = "\n   USAGE - filterGen.py generated.filter marketIndex.xml filterConfig
 filterOutputPath = "./ELF.filter"
 marketIndexPath = "./marketIndex.xml"
 filterConfigPath = "./filterConfigs.xml"
+_log = logging.getLogger(__name__)
+
+def getVersion():
+    return version
 
 def clearTierData(tierNames, numTiers):
     for tier in range(numTiers):
@@ -86,7 +91,11 @@ def filterGen(_filterOutputPath, _marketIndexPath, _filterConfigPath):
         numTiers=numTiers+1
        
     #Open filter file for creation
-    filterFile = open(_filterOutputPath, "w")
+    try:
+        filterFile = open(_filterOutputPath, "w")
+    except:
+        _log.error("Failed to open filter file "+filename+" (Unexpected exception)")
+        return 1 #ERROR
        
     #Special Cases - Filter rules bellonging to a special case need to beed listed first so they dont get hidden
     for staticEntry in filterConfig.iter("static"):
@@ -255,6 +264,7 @@ def filterGen(_filterOutputPath, _marketIndexPath, _filterConfigPath):
     addHideFilterBlock(filterFile, displayTiers, numTiers)
                 
     filterFile.close()
+    return 0
 
 if __name__ == "__main__":
     #Either specify no args (default) or both
@@ -265,4 +275,6 @@ if __name__ == "__main__":
     elif(len(sys.argv) != 1):
         print(USAGE)
         exit()
+        
     filterGen(filterOutputPath, marketIndexPath, filterConfigPath)
+    exit()

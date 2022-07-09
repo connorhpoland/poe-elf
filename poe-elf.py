@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------
 # Created By  : Connor Poland
 # Created Date: 2022-06-22
-# version ='0.0'
+version = "0.0"
 # ---------------------------------------------------------------------------
 #   Path of Exile - Economy-Linked Loot Filter
 # ---------------------------------------------------------------------------
@@ -18,6 +18,7 @@
 import sys
 import time
 import configparser
+import logging
 import capture_poeninja as CAPTURE
 import ninja_indexGen as INDEX
 import rand_indexGen as RAND_INDEX
@@ -32,31 +33,57 @@ filterConfigPath = "./filterConfigs.xml"
 refreshInterval = 1
 randomValue = 0
 refreshNotify = 1
+loggingLevel = 40 #ERROR
+loggingPath = 0
 
 configPath = "./elf.config"
 
+def getVersion():
+    return version
+
 def poe_elf():
+    bRetry = 0
     while(1):
-        starttime = time.time() 
-        CAPTURE.capture_poeninja(leagueName, dumpDirPath)
+        if(not bRetry):
+            starttime = time.time()
+            logging.info("Starting to generate new filter")
+        if(CAPTURE.capture_poeninja(leagueName, dumpDirPath)):
+            logging.error("Failed to capture poeninja data... Restarting filter generation")
+            bRetry = 1
+            continue
         if(randomValue):
-            RAND_INDEX.indexGen(marketIndexPath, dumpDirPath)
+            if(RAND_INDEX.indexGen(marketIndexPath, dumpDirPath)):
+                logging.error("Failed to parse (random) economy data into index... Restarting filter generation")
+                bRetry = 1
+                continue
         else:
-            INDEX.indexGen(marketIndexPath, dumpDirPath)
-        GENERATE.filterGen(filterOutputPath, marketIndexPath, filterConfigPath)
+            if(INDEX.indexGen(marketIndexPath, dumpDirPath)):
+                logging.error("Failed to parse economy data into index... Restarting filter generation")
+                bRetry = 1
+                continue
+        if(GENERATE.filterGen(filterOutputPath, marketIndexPath, filterConfigPath)):
+            logging.error("Failed to create filter from market index... Restarting filter generation")
+            bRetry = 1
+            continue
+        
         #Filter done!
+        bRetry = 0
+        logging.critical("New filter generated! "+filterOutputPath)
         if(refreshNotify):
             print("\a")
+            
         if(refreshInterval > 0):
             endtime = time.time()
             sleeptime = (starttime+(refreshInterval*60)) - endtime
             if(sleeptime > 0):
+                logging.info("Sleeping for "+str(sleeptime)+" seconds before generating another filter")
                 time.sleep(sleeptime)
         else:
             exit()
 
 if __name__ == "__main__":
     #Load GLOBAL defaults (implicit)
+    
     #Load config defaults (from ./elf.config)
     config = configparser.ConfigParser()
     config.read(configPath)
@@ -79,5 +106,44 @@ if __name__ == "__main__":
     if("DEBUG" in config):
         if("randomValue" in config["DEBUG"]):
             randomValue = config["DEBUG"].getboolean("randomValue")
+        if("loggingLevel" in config["DEBUG"]):
+            loggingLevel = config["DEBUG"].getint("loggingLevel")
+        if("loggingPath" in config["DEBUG"]):
+            loggingPath = config["DEBUG"].get("loggingPath")
+            
     #Load any command line args - TODO
-    poe_elf()
+    
+    #Init logging module
+    if(loggingPath != 0):
+        logging.basicConfig(filename=loggingPath,level=loggingLevel)
+    else:
+        logging.basicConfig(level=loggingLevel)
+        
+    logging.critical("Path of Exile - Economy-Linked Loot Filter v"+getVersion())
+    logging.info(CAPTURE.__name__+".py v"+CAPTURE.getVersion())
+    logging.info(INDEX.__name__+".py v"+INDEX.getVersion())
+    logging.info(RAND_INDEX.__name__+".py v"+RAND_INDEX.getVersion())
+    logging.info(GENERATE.__name__+".py v"+GENERATE.getVersion())
+        
+    #Dump configs to logs
+    logging.info("leagueName = "+leagueName)
+    logging.info("dumpDirPath = "+dumpDirPath)
+    logging.info("filterOutputPath = "+filterOutputPath)
+    logging.info("marketIndexPath = "+marketIndexPath)
+    logging.info("filterConfigPath = "+filterConfigPath)
+    logging.info("refreshInterval = "+str(refreshInterval))
+    logging.info("randomValue = "+str(randomValue))
+    logging.info("refreshNotify = "+str(refreshNotify))
+    logging.info("loggingLevel = "+logging.getLevelName(loggingLevel))
+    if(loggingPath):
+        logging.info("loggingPath = "+loggingPath)
+    else:
+        logging.info("logginPath = NONE (CMD)")
+        
+    try: 
+        poe_elf()
+    except KeyboardInterrupt:
+        logging.critical("Shutting down poe-elf (Interrupt Recv'd)")
+    except:
+        logging.critical("Shutting down poe-elf (Untrapped Exception)")
+    exit()
