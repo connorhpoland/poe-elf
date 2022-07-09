@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------
 # Created By  : Connor Poland
 # Created Date: 2022-06-21
-# version ='0.0'
+version = "0.0"
 # ---------------------------------------------------------------------------
 #   Path of Exile - Economy-Linked Loot Filter
 # ---------------------------------------------------------------------------
@@ -19,6 +19,7 @@
 
 import sys
 import requests
+import logging
 
 USAGE = "\n   USAGE - capture_poeninja.py leagueName dumpDir\n\
         leagueName - Name of the challenge league to be captured (Names with spaces should be quoted)\n\
@@ -27,13 +28,20 @@ USAGE = "\n   USAGE - capture_poeninja.py leagueName dumpDir\n\
 #GLOBAL
 leagueName = "Sentinel"
 dumpDirPath = "./tmp_poe_ninja"
+_log = logging.getLogger(__name__)
+
+def getVersion():
+    return version
 
 def requestToFile(requestResp, filename):
     #Open file associated with the request
-    dumpFile = open(filename, "w", encoding="utf-8")
-    if(dumpFile):
+    try:
+        dumpFile = open(filename, "w", encoding="utf-8")
+    except:
+        _log.error("Failed to write request to file "+filename+" (Unexpected exception)")
+    else:
         dumpFile.write(requestResp.text)
-        print(filename+" OK!")
+        _log.info("Request "+filename+" captured OK")
         dumpFile.close()
 
 currency_types = {"Currency", "Fragment"}
@@ -47,13 +55,14 @@ def capture_poeninja(_leagueName, _dumpDirPath):
         if(requestResp.status_code == 200):
             requestToFile(requestResp, _dumpDirPath+"/"+currency+".json")
         else:
-            print("Bad response for "+currency+" in league "+_leagueName)
+            _log.error("Bad request response for "+currency+" in league "+_leagueName)
     for item in item_types:
         requestResp = requests.get("https://poe.ninja/api/data/itemoverview?league="+_leagueName+"&type="+item)
         if(requestResp.status_code == 200):
             requestToFile(requestResp, _dumpDirPath+"/"+item+".json")
         else:
-            print("Bad response for "+item+" in league "+_leagueName)
+            _log.error("Bad request response for "+currency+" in league "+_leagueName)
+    return 0 #OK
 
 if __name__ == "__main__":
     #Either specify no args (default) or both
@@ -65,3 +74,4 @@ if __name__ == "__main__":
         exit()
 
     capture_poeninja(leagueName, dumpDirPath)
+    exit()

@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------
 # Created By  : Connor Poland
 # Created Date: 2022-06-06
-# version ='0.0'
+version = "0.0"
 # ---------------------------------------------------------------------------
 #   Path of Exile - Economy-Linked Loot Filter
 # ---------------------------------------------------------------------------
@@ -22,6 +22,7 @@ import json
 import xml.etree.ElementTree as ET
 import random
 from datetime import datetime
+import logging
 
 USAGE = "\n   USAGE - rand_indexGen.py marketIndex.xml dumpDir\n\
         marketIndex.xml - Path to the local index file to be created\n\
@@ -30,6 +31,10 @@ USAGE = "\n   USAGE - rand_indexGen.py marketIndex.xml dumpDir\n\
 #GLOBAL
 marketIndexPath = "./marketIndex.xml"
 dumpDirPath = "./tmp_poe_ninja"
+_log = logging.getLogger(__name__)
+
+def getVersion():
+    return version
 
 #----- Common JSON Utils -----
 def extractJSON(json_file_name):
@@ -492,6 +497,8 @@ def indexGen(_marketIndexPath, _dumpDirPath):
     #Dump the full XML tree to marketIndex.xml file path
     xmlTree = ET.ElementTree(marketSnapshot)
     xmlTree.write(_marketIndexPath, xml_declaration=True, encoding="utf-8")
+    
+    return 0 #OK
 
 if __name__ == "__main__":
     #Either specify no args (default) or both
@@ -503,3 +510,4 @@ if __name__ == "__main__":
         exit()
 
     indexGen(marketIndexPath, dumpDirPath)
+    exit()
