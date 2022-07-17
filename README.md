@@ -60,6 +60,8 @@ Fortunatly, https://poe.ninja/ already offers a rather complete and accurate rea
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This tool prototype will also not officially support Standard leagues due to increased complexity of legacy items.</p>
 
 <h2>Future Features</h2>
+<h3>Utilize XML Schema</h3>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Currently, our XML files each have and .xml.help file that describes (using in-line comments) the requirements and constraints of the XML files used in this tool. To improve this, we can utilize the XSD (XML Scheme Definition) language to replace our .xml.help files while also being able to leverage the XSD files at run-time to validate user/tool generated XML files.</p>
 <h3>Command Line Options</h3>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ideally, some or all of the elf.config configuration items should be command-line configurable. This is not likely to be a popular use-case so this is low priority.</p>
 <h3>Linux Support</h3>
